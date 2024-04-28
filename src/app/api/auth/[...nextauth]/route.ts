@@ -1,36 +1,14 @@
-import NextAuth from "next-auth";
-import GithubProvider from "next-auth/providers/github";
-import CredentialsProvider from "next-auth/providers/credentials";
-
-export const authOptions = {
+import NextAuth, { AuthOptions } from "next-auth";
+import GitHubProvider from "next-auth/providers/github";
+import { DrizzleAdapter } from "@auth/drizzle-adapter";
+import { db } from "@/server/db/db";
+export const authOptions: AuthOptions = {
   // Configure one or more authentication providers
+  adapter: DrizzleAdapter(db),
   providers: [
-    CredentialsProvider({
-      // The name to display on the sign in form (e.g. 'Sign in with...')
-      name: "Credentials",
-      // The credentials is used to generate a suitable form on the sign in page.
-      // You can specify whatever fields you are expecting to be submitted.
-      // e.g. domain, username, password, 2FA token, etc.
-      // You can pass any HTML attribute to the <input> tag through the object.
-      credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(credentials, req) {
-        if (!credentials) {
-          return null;
-        }
-
-        const { username, password } = credentials;
-        if (username !== "jokcy" || password !== "123123") {
-          return null;
-        }
-
-        return {
-          id: "1",
-          ...credentials,
-        };
-      },
+    GitHubProvider({
+      clientId: "648c6b21ae654e897a7e",
+      clientSecret: "e2ae65e4c22f5c8d0611f6e86a3010f738a47084",
     }),
   ],
 };
