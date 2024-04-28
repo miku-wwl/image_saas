@@ -3,10 +3,10 @@ export default defineConfig({
   schema: "./src/server/db/schema.ts",
   driver: "pg",
   dbCredentials: {
-    host: "",
+    host: "124.70.98.205",
     port: 5432,
     user: "postgres",
-    password: "",
+    password: "123123",
     database: "postgres",
   },
   verbose: true,
