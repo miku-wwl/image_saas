@@ -4,15 +4,9 @@ import {
   text,
   primaryKey,
   integer,
+  date,
 } from "drizzle-orm/pg-core";
-import postgres from "postgres";
-import { drizzle } from "drizzle-orm/postgres-js";
 import type { AdapterAccount } from "next-auth/adapters";
-
-const connectionString = "postgres://postgres:postgres@localhost:5432/drizzle";
-const pool = postgres(connectionString, { max: 1 });
-
-export const db = drizzle(pool);
 
 export const users = pgTable("user", {
   id: text("id")
@@ -22,6 +16,7 @@ export const users = pgTable("user", {
   email: text("email").notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
+  createAt: date("create_at").defaultNow(),
 });
 
 export const accounts = pgTable(
