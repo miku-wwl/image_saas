@@ -1,4 +1,6 @@
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
+import type { Adapter } from "next-auth/adapters";
+
 import {
   AuthOptions,
   getServerSession as nextAuthGetServerSession,
@@ -9,7 +11,7 @@ export const authOptions: AuthOptions = {
   // session: {
   //     strategy: "jwt",
   // },
-  adapter: DrizzleAdapter(db),
+  adapter: DrizzleAdapter(db) as Adapter,
   // Configure one or more authentication providers
   providers: [
     GitHubProvider({
