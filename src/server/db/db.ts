@@ -5,6 +5,6 @@ import * as schema from "./schema";
 
 // for query purposes
 const queryClient = postgres(
-  "postgres://postgres:123123@124.70.98.205:5432/postgres"
+  "postgres://postgres:postgres@117.72.69.172:5432/postgres"
 );
 export const db = drizzle(queryClient, { schema });
